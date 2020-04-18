@@ -12,7 +12,7 @@ foreach ($doc[".listItem"] as $list){
     //放送局
     $station = pq($list)->find('.listDetailOnAir__station')->text();
     
-    $text = $text.$title.$time.$station;
+    $text = $text."\n".$title."\n".$time."\n".$station;
   }
 
 
