@@ -1,28 +1,20 @@
 <?php
+require_once("phpQuery-onefile.php");
+// HTMLの取得
+$doc = phpQuery::newDocumentFile("https://talent.thetv.jp/person/2000031367/tv/");
 
-require 'vendor/autoload.php';
-
-    use JonnyW\PhantomJs\Client;
-    use JonnyW\PhantomJs\DependencyInjection\ServiceContainer;
+foreach ($doc[".listItem"] as $list){
+    //タイトル
+    $title = pq($list)->find('.listHeading')->text();
+    //日時
+    $time = pq($list)->find('.listDetailOnAir__datetime')->text();
+    //放送局
+    $station = pq($list)->find('.listDetailOnAir__station')->text();
     
-    $client = Client::getInstance();
-    $client->getEngine()->setPath('bin\\phantomjs.exe');
-    /** 
-     * @see JonnyW\PhantomJs\Http\Request
-     **/
-    $request = $client->getMessageFactory()->createRequest('https://tv.yahoo.co.jp/search/?q=IT', 'GET');
+    echo $title;
+    echo $time;
+    echo $station;
+    echo "<br>";
+  }
 
-    /** 
-     * @see JonnyW\PhantomJs\Http\Response 
-     **/
-    $response = $client->getMessageFactory()->createResponse();
-
-    // Send the request
-    $client->send($request, $response);
-    var_dump($response);
-    if($response->getStatus() === 200) {
-
-        // Dump the requested page content
-        echo $response->getContent();
-    }
 ?>
