@@ -2,17 +2,20 @@
 require_once("phpQuery-onefile.php");
 // HTMLの取得
 $doc = phpQuery::newDocumentFile("https://talent.thetv.jp/person/2000031367/tv/");
-$text;
+$text = "";
 
-foreach ($doc[".listItem"] as $list){
+foreach ($doc[".listItem"] as $key => $list){
+
+    //番号
+    $key = $key + 1;
     //タイトル
     $title = pq($list)->find('.listHeading')->text();
     //日時
     $time = pq($list)->find('.listDetailOnAir__datetime')->text();
     //放送局
     $station = pq($list)->find('.listDetailOnAir__station')->text();
-    
-    $text = $text."\n".$title."\n".$time."\n".$station;
+
+    $text = $text.$key.".".$title."\n".$time."\n".$station."\n\n";
   }
 
 
