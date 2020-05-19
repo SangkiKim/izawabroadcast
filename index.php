@@ -1,5 +1,7 @@
 <?php
 require_once("phpQuery-onefile.php");
+require_once("key.php");
+
 // HTMLの取得
 $doc = phpQuery::newDocumentFile("https://talent.thetv.jp/person/2000031367/tv/");
 $text = "";
@@ -38,8 +40,8 @@ foreach ($doc[".listItem"] as $key => $list){
 
 require_once('./LINEBotTiny.php');
 
-$channelAccessToken = 'xriJJ2wfCNCXygkplrF34bo3qeylR3jCxujh83YkyBsO/rBOtnryS9dp7yZtgWj2ujhzmkSuT9zOZXyso0kRngFnf0TyCduX3dBfzXljowSoqXjeqdt651i5cGf2rmdHgvPxhHcldQyDe0rWechjagdB04t89/1O/w1cDnyilFU=';
-$channelSecret = '60b89777e481b7c7cd29ca7ac92dc71e'; 
+$channelAccessToken = CHANNEL_ACCESS_TOKEN;
+$channelSecret = CHANNEL_SECRET; 
 
 $client = new LINEBotTiny($channelAccessToken, $channelSecret);
 foreach ($client->parseEvents() as $event) {
